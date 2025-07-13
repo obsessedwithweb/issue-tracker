@@ -22,5 +22,5 @@
 
 body {
     color: var(--foreground);
-    font-family: var(--font-parkinsans);
+    /* font-family: var(--font-parkinsans); */
 }
