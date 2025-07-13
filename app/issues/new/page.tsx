@@ -2,18 +2,22 @@
 
 import dynamic from 'next/dynamic';
 import axios from "axios";
-import {useRouter} from "next/navigation";
-import {useForm, Controller} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {z} from 'zod'
+import { useRouter } from "next/navigation";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from 'zod'
 
 
-import {Button, Callout, TextField, Text} from "@radix-ui/themes";
+import { Button, Callout, TextField, Text } from "@radix-ui/themes";
 
 import "easymde/dist/easymde.min.css";
-import {useState} from 'react';
-import {createIssueShcema} from "@/lib/validateSchemas";
+import { useState } from 'react';
+import { createIssueShcema } from "@/lib/validateSchemas";
 import ErrorMessage from "@/components/UI/ErrorMessage";
+import { Ripples } from 'ldrs/react'
+import 'ldrs/react/Ripples.css'
+
+
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
     ssr: false
@@ -22,7 +26,7 @@ const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
 type IssueForm = z.infer<typeof createIssueShcema>
 
 export default function NewIssue() {
-    const {register, control, handleSubmit, formState: {errors}} = useForm<IssueForm>({
+    const { register, control, handleSubmit, formState: { errors, isSubmitting } } = useForm<IssueForm>({
         resolver: zodResolver(createIssueShcema)
     })
     const router = useRouter()
@@ -63,11 +67,14 @@ export default function NewIssue() {
                     <Controller
                         name="description"
                         control={control}
-                        render={({field}) => <SimpleMDE placeholder="Describe your issue" {...field} />}
+                        render={({ field }) => <SimpleMDE placeholder="Describe your issue" {...field} />}
                     />
                     <ErrorMessage >{errors.description?.message}</ErrorMessage >
                 </div >
-                <Button >Add new issue</Button >
+                <Button disabled={isSubmitting} >
+                    {isSubmitting ? <Ripples color='gray' size='40' /> : 'Add new issue'}
+                </Button >
+                {/* <Ripples color='gray' size='40' /> */}
             </form >
         </div >
     );
