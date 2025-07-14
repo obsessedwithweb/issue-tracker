@@ -1,5 +1,7 @@
+'use server'
 import { issueShcema } from "@/lib/validateSchemas";
 import { prisma } from "@/prisma/client";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -34,6 +36,8 @@ export async function PATCH(
             }
         }
     )
+    revalidatePath('/issues')
+
     return NextResponse.json(updatedIssue)
 
 }
