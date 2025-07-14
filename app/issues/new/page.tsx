@@ -1,23 +1,21 @@
 "use client";
 
-import ErrorMessage from "@/components/UI/ErrorMessage";
-import { createIssueShcema } from "@/lib/validateSchemas";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Callout, TextField } from "@radix-ui/themes";
+import {ErrorMessage} from "@/components/UI";
+import {createIssueShcema} from "@/lib/validateSchemas";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {Button, Callout, TextField} from "@radix-ui/themes";
 import axios from "axios";
-import "easymde/dist/easymde.min.css";
-import { Ripples } from 'ldrs/react';
-import 'ldrs/react/Ripples.css';
-import { Info, MoveLeft } from "lucide-react";
+import {Ripples} from 'ldrs/react';
+import {Info, MoveLeft} from "lucide-react";
 import dynamic from 'next/dynamic';
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from 'react';
-import { Controller, useForm } from "react-hook-form";
-import { z } from 'zod';
+import {useRouter} from "next/navigation";
+import {useState} from 'react';
+import {Controller, useForm} from "react-hook-form";
+import {z} from 'zod';
 
-
-
+import "easymde/dist/easymde.min.css";
+import 'ldrs/react/Ripples.css';
 
 const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
     ssr: false
@@ -36,8 +34,8 @@ export default function NewIssue() {
         try {
             await axios.post('/api/issues', data)
             router.push('/issues')
-        } catch (error) {
-            setError("Check entered values")
+        } catch (_) {
+            setError("Check entered values ")
             // console.log(error?.response.data.description._errors[0]);
             // console.log(error?.response.data.title._errors[0]);
         }

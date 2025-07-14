@@ -1,10 +1,10 @@
-import IssueStatusBadge from "@/components/UI/issueStatusBadge"
-import { prisma } from "@/prisma/client"
-import { Button, Card, Flex, Heading, Text } from "@radix-ui/themes"
+import {IssueStatusBadge} from "@/components/UI"
+import {prisma} from "@/prisma/client"
+import {Button, Card, Flex, Heading, Text} from "@radix-ui/themes"
 
-import { MoveLeft } from "lucide-react"
+import {MoveLeft} from "lucide-react"
 import Link from "next/link"
-import { notFound } from "next/navigation"
+import {notFound} from "next/navigation"
 import Markdown from 'react-markdown'
 
 interface Props {

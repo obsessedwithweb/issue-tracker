@@ -1,6 +1,6 @@
 import NextLink from "next/link";
-import { Link as RadixLink } from "@radix-ui/themes";
-import { PropsWithChildren } from "react";
+import {Link as RadixLink} from "@radix-ui/themes";
+import {PropsWithChildren} from "react";
 
 // interface Props {
 //     href: string,

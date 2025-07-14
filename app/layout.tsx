@@ -1,11 +1,11 @@
 import "./globals.css";
-// import "@radix-ui/themes/styles.css";
+import "@radix-ui/themes/styles.css";
 import './theme-config.css'
 
-import type { Metadata } from "next";
-import { Theme, ThemePanel } from "@radix-ui/themes";
-import { Geist, Geist_Mono, Parkinsans } from "next/font/google";
-import NavBar from "@/components/UI/NavBar";
+import type {Metadata} from "next";
+import {Theme} from "@radix-ui/themes";
+import {Geist, Geist_Mono, Parkinsans} from "next/font/google";
+import {NavBar} from "@/components/UI";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",

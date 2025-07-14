@@ -1,5 +1,5 @@
-import { Button, Card, Flex, Skeleton } from '@radix-ui/themes'
-import { MoveLeft } from 'lucide-react'
+import {Button, Card, Flex, Skeleton} from '@radix-ui/themes'
+import {MoveLeft} from 'lucide-react'
 import Link from "next/link"
 
 const IssueDetailLoading = () => {

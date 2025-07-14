@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { Bug } from "lucide-react";
+import {usePathname} from "next/navigation";
+import {Bug} from "lucide-react";
 import classNames from "classnames";
 import Link from "next/link";
 
