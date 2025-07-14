@@ -42,7 +42,6 @@ export default function RootLayout({
                     <main className={`px-5`}>
                         {children}
                     </main >
-                    <ThemePanel />
                 </Theme>
             </body >
         </html >
