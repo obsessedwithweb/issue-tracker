@@ -7,7 +7,7 @@ import Markdown from 'react-markdown'
 
 const IssueDetails = ({ issue }: { issue: Issue }) => {
     return (
-        <Flex className="" direction='column' gap='4'>
+        <Flex className="md:col-span-4" direction='column' gap='4'>
             <Link href={`/issues`} >
                 <Button className="">
                     <MoveLeft />

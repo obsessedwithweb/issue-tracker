@@ -2,11 +2,8 @@ import { prisma } from "@/prisma/client";
 import { notFound } from "next/navigation";
 import IssueForm from "../../_components/IssueForm";
 
-interface Props {
-    params: { id: string }
-}
 
-const EditIssuePage = async ({ params }: Props) => {
+const EditIssuePage = async ({ params }: {params: { id: string }}) => {
     const { id } = await params
 
     // if (typeof parseInt(id) !== 'number') return notFound()

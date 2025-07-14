@@ -1,11 +1,11 @@
-import "./globals.css";
 import "@radix-ui/themes/styles.css";
-import './theme-config.css'
+import "./globals.css";
+import './theme-config.css';
 
-import type {Metadata} from "next";
-import {Theme} from "@radix-ui/themes";
-import {Geist, Geist_Mono, Parkinsans} from "next/font/google";
-import {NavBar} from "@/components/UI";
+import { NavBar } from "@/components/UI";
+import { Container, Theme } from "@radix-ui/themes";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono, Parkinsans } from "next/font/google";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -40,7 +40,9 @@ export default function RootLayout({
                 <Theme accentColor="violet" grayColor="olive" radius="large">
                     <NavBar />
                     <main className={`px-5`}>
-                        {children}
+                        <Container>
+                            {children}
+                        </Container>
                     </main >
                 </Theme>
             </body >
