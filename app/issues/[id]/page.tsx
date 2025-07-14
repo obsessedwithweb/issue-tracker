@@ -1,6 +1,7 @@
 import IssueStatusBadge from "@/components/UI/issueStatusBadge"
 import { prisma } from "@/prisma/client"
-import { Card, Flex, Heading, Button, Text } from "@radix-ui/themes"
+import { Button, Card, Flex, Heading, Text } from "@radix-ui/themes"
+
 import { MoveLeft } from "lucide-react"
 import Link from "next/link"
 import { notFound } from "next/navigation"
@@ -23,7 +24,7 @@ const IssueDetail = async ({ params }: Props) => {
     if (!issue) return notFound();
 
     return (
-        <Flex className="max-w-80 hover:content-['Back']" direction='column' gap='4'>
+        <Flex className="max-w-xl hover:content-['Back']" direction='column' gap='4'>
             <Link href={`/issues`} >
                 <Button className=" hover:content-['Back']">
                     <MoveLeft />

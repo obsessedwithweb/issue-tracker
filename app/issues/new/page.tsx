@@ -1,21 +1,21 @@
 "use client";
 
-import dynamic from 'next/dynamic';
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from 'zod'
-
-
-import { Button, Callout, TextField, Text } from "@radix-ui/themes";
-
-import "easymde/dist/easymde.min.css";
-import { useState } from 'react';
-import { createIssueShcema } from "@/lib/validateSchemas";
 import ErrorMessage from "@/components/UI/ErrorMessage";
-import { Ripples } from 'ldrs/react'
-import 'ldrs/react/Ripples.css'
+import { createIssueShcema } from "@/lib/validateSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Callout, TextField } from "@radix-ui/themes";
+import axios from "axios";
+import "easymde/dist/easymde.min.css";
+import { Ripples } from 'ldrs/react';
+import 'ldrs/react/Ripples.css';
+import { Info, MoveLeft } from "lucide-react";
+import dynamic from 'next/dynamic';
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from 'react';
+import { Controller, useForm } from "react-hook-form";
+import { z } from 'zod';
+
 
 
 
@@ -42,13 +42,19 @@ export default function NewIssue() {
             // console.log(error?.response.data.title._errors[0]);
         }
     }
+
     return (
-        <div className='max-w-xl space-y-3 mb-5' >
+        <div className='max-w-xl flex flex-col gap-3 mb-5' >
+            <Link href={`/issues`} className="">
+                <Button className="">
+                    <MoveLeft />
+                </Button>
+            </Link>
             {
                 error && <Callout.Root color='red' >
-                    {/* <Callout.Icon>
-                    <InfoCircledIcon />
-                </Callout.Icon> */}
+                    <Callout.Icon>
+                        <Info />
+                    </Callout.Icon>
                     <Callout.Text >
                         {error}
                     </Callout.Text >
