@@ -8,8 +8,6 @@ import { Button, Callout, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import { Ripples } from 'ldrs/react';
 import { Info, MoveLeft } from "lucide-react";
-import "easymde/dist/easymde.min.css";
-import 'ldrs/react/Ripples.css';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from 'react';
@@ -17,6 +15,8 @@ import { Controller, useForm } from "react-hook-form";
 import SimpleMDE from 'react-simplemde-editor';
 import { z } from 'zod';
 
+import "easymde/dist/easymde.min.css";
+import 'ldrs/react/Ripples.css';
 
 type IssueForm = z.infer<typeof issueShcema>
 
@@ -77,7 +77,8 @@ export default function NewIssue({ issue }: { issue?: Issue }) {
                     <ErrorMessage >{errors.description?.message}</ErrorMessage >
                 </div >
                 <Button disabled={isSubmitting} >
-                    {isSubmitting ? <Ripples color='gray' size='40' /> : 'Add new issue'}
+                    Add new issue
+                    {isSubmitting && <Ripples color='gray' size='40' />}
                 </Button >
                 {/* <Ripples color='gray' size='40' /> */}
             </form >

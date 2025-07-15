@@ -4,17 +4,24 @@ import { AlertDialog, Button, Flex } from "@radix-ui/themes"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { Ripples } from 'ldrs/react';
+
+
+import 'ldrs/react/Ripples.css';
 
 
 const DeleteIssueButton = ({ issueID }: { issueID: number }) => {
   const [error, setError] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
   const router = useRouter()
 
   const deleteIssue = async () => {
     try {
+      setIsDeleting(true)
       await axios.delete('/api/issues/' + issueID)
       router.push('/issues')
     } catch (_) {
+      setIsDeleting(false)
       setError(true)
     }
   }
@@ -24,7 +31,11 @@ const DeleteIssueButton = ({ issueID }: { issueID: number }) => {
       <AlertDialog.Root>
 
         <AlertDialog.Trigger>
-          <Button color="red">Delete issue</Button>
+          <Button
+            disabled={isDeleting}
+            color="red"
+            className="transition-colors"
+          >Delete issue {isDeleting && <Ripples color='gray' size='35' />}</Button>
         </AlertDialog.Trigger>
 
         <AlertDialog.Content > {/*maxWidth="450px"*/}
