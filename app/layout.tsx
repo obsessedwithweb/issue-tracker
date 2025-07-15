@@ -6,6 +6,7 @@ import { NavBar } from "@/components/UI";
 import { Container, Theme } from "@radix-ui/themes";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Parkinsans } from "next/font/google";
+import AuthProvider from "./auth/Provider";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -37,14 +38,16 @@ export default function RootLayout({
         <html lang="en" className={parkinSans.variable} >
             <body
                 className={`${geistSans.variable} ${geistMono.variable} ${parkinSans.variable} antialiased`} >
-                <Theme accentColor="violet" grayColor="olive" radius="large">
-                    <NavBar />
-                    <main className={`px-5`}>
-                        <Container>
-                            {children}
-                        </Container>
-                    </main >
-                </Theme>
+                <AuthProvider>
+                    <Theme accentColor="violet" grayColor="olive" radius="large">
+                        <NavBar />
+                        <main className={`px-5`}>
+                            <Container>
+                                {children}
+                            </Container>
+                        </main >
+                    </Theme>
+                </AuthProvider>
             </body >
         </html >
     );
