@@ -14,14 +14,7 @@ type Link = {
 
 
 function NavBar() {
-  const { status, data } = useSession();
 
-  const currentPath: string = usePathname();
-
-  const links: Link[] = [
-    { label: "Dashboard", href: "/" },
-    { label: "Issues", href: "/issues" },
-  ];
   return (
     <nav
       className={`py-3 px-5 mb-5 border-b border-zinc-200`}
@@ -35,58 +28,72 @@ function NavBar() {
             >
               <Bug />
             </Link>
-            <ul className={`flex gap-4`}>
-              {links.map((link: Link) => (
-                <li key={link.href}>
-                  <Link
-                    className={classNames({
-                      "text-slate-950": currentPath === link.href,
-                      "text-zinc-600": currentPath !== link.href,
-                      "hover:text-zinc-900 transition-colors": true,
-                    })}
-                    href={link.href}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <NavLinks />
           </Flex>
-          <Box>
-            {
-              status === "authenticated" &&
-              <DropdownMenu.Root>
-                <DropdownMenu.Trigger
-                  className="transition-all hover:ring ring-gray-600/40 hover:shadow-lg shadow-slate-400/50" >
-                  <Avatar
-                    className="cursor-pointer"
-                    src={data.user!.image!}
-                    size='2'
-                    radius="full"
-                    fallback={"?"}
-                    // referrerPolicy="no-referrer"
-                  />
-                </DropdownMenu.Trigger>
-                <DropdownMenu.Content>
-                  <DropdownMenu.Item>{data.user?.email}</DropdownMenu.Item>
-                  <DropdownMenu.Separator />
-                  <DropdownMenu.Item color="red">
-                    <Link href={"/api/auth/signout"}>Logout</Link>
-                  </DropdownMenu.Item>
-                </DropdownMenu.Content>
-              </DropdownMenu.Root>
-
-            }
-            {
-              status === "unauthenticated" && <Link href={"/api/auth/signin"}>Login</Link>
-            }{
-              status === "loading" && <Skeleton>Loading</Skeleton>
-            }
-          </Box>
+          <AuthStatus />
         </Flex>
       </Container>
     </nav>
   );
+}
+
+const NavLinks = () => {
+  const currentPath: string = usePathname();
+
+  const links: Link[] = [
+    { label: "Dashboard", href: "/" },
+    { label: "Issues", href: "/issues" },
+  ];
+
+  return (
+    <ul className={`flex gap-4`}>
+      {links.map((link: Link) => (
+        <li key={link.href}>
+          <Link
+            className={classNames({
+              "nav-link": true,
+              "!text-slate-950": currentPath === link.href,
+            })}
+            href={link.href}
+          >
+            {link.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+const AuthStatus = () => {
+  const { status, data: session } = useSession();
+
+  if (status === "unauthenticated") return <Link className="nav-link" href={"/api/auth/signin"}>Login</Link>
+  else if (status === "loading") return <Skeleton>Loading</Skeleton>
+  else
+    return (
+      <Box>
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger
+            className="transition-all hover:ring ring-gray-600/40 hover:shadow-lg shadow-slate-400/50" >
+            <Avatar
+              className="cursor-pointer"
+              src={session!.user!.image!}
+              size='2'
+              radius="full"
+              fallback={"?"}
+            // referrerPolicy="no-referrer"
+            />
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content>
+            <DropdownMenu.Item>{session!.user!.email}</DropdownMenu.Item>
+            <DropdownMenu.Separator />
+            <DropdownMenu.Item color="red">
+              <Link href={"/api/auth/signout"}>Logout</Link>
+            </DropdownMenu.Item>
+          </DropdownMenu.Content>
+        </DropdownMenu.Root>
+      </Box>
+    )
 }
 
 export default NavBar;

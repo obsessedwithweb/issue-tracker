@@ -25,3 +25,10 @@ body {
     color: var(--foreground);
     /* font-family: var(--font-parkinsans); */
 }
+
+
+@layer utilities {
+    .nav-link {
+        @apply text-zinc-600 hover:text-zinc-900 transition-colors
+    }
+}
