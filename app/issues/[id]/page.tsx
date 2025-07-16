@@ -1,7 +1,7 @@
 import authOptions from "@/app/auth/authOptions"
-import { instance as axios } from "@/lib/axios-instance"
+// import { instance as axios } from "@/lib/axios-instance"
 import { prisma } from "@/prisma/client"
-import { User } from "@prisma/client"
+// import { User } from "@prisma/client"
 import { Flex, Grid } from "@radix-ui/themes"
 import { getServerSession } from "next-auth"
 import { notFound } from "next/navigation"
@@ -17,7 +17,7 @@ interface Props {
 const IssueDetail = async ({ params }: Props) => {
     const { id } = await params
     const session = await getServerSession(authOptions)
-    const { data } = await axios.get<User[]>('/api/users')
+    // const { data } = await axios.get<User[]>('/api/users')
 
     const issue = await prisma.issue.findUnique({
         where: { id: +id }
@@ -30,7 +30,7 @@ const IssueDetail = async ({ params }: Props) => {
             <IssueDetails issue={issue} />
             {session &&
                 <Flex direction='column' gap='4'>
-                    <AsigneeSelect users={data} />
+                    <AsigneeSelect />
                     <EditIssueButton issueID={issue.id} />
                     <DeleteIssueButton issueID={issue.id} />
                 </Flex>

@@ -7,7 +7,7 @@ import { Container, Theme } from "@radix-ui/themes";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Parkinsans } from "next/font/google";
 import AuthProvider from "./auth/Provider";
-
+import ReactQueryClientProvider from '@/components/QueryClientProvider'
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],
@@ -38,16 +38,18 @@ export default function RootLayout({
         <html lang="en" className={parkinSans.variable} >
             <body
                 className={`${geistSans.variable} ${geistMono.variable} ${parkinSans.variable} antialiased`} >
-                <AuthProvider>
-                    <Theme accentColor="violet" grayColor="olive" radius="large">
-                        <NavBar />
-                        <main className={`px-5`}>
-                            <Container>
-                                {children}
-                            </Container>
-                        </main >
-                    </Theme>
-                </AuthProvider>
+                <ReactQueryClientProvider>
+                    <AuthProvider>
+                        <Theme accentColor="violet" grayColor="olive" radius="large">
+                            <NavBar />
+                            <main className={`px-5`}>
+                                <Container>
+                                    {children}
+                                </Container>
+                            </main >
+                        </Theme>
+                    </AuthProvider>
+                </ReactQueryClientProvider>
             </body >
         </html >
     );
