@@ -1,11 +1,11 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { Bug } from "lucide-react";
+import { Avatar, Box, Button, Container, DropdownMenu, Flex, Skeleton } from "@radix-ui/themes";
 import classNames from "classnames";
-import Link from "next/link";
+import { Bug } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { Box, Container, Flex, Skeleton } from "@radix-ui/themes";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type Link = {
   label: string;
@@ -54,7 +54,28 @@ function NavBar() {
           </Flex>
           <Box>
             {
-              status === "authenticated" && <Link href={"/api/auth/signout"}>Logout</Link>
+              status === "authenticated" &&
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger
+                  className="transition-all hover:ring ring-gray-600/40 hover:shadow-lg shadow-slate-400/50" >
+                  <Avatar
+                    className="cursor-pointer"
+                    src={data.user!.image!}
+                    size='2'
+                    radius="full"
+                    fallback={"?"}
+                    // referrerPolicy="no-referrer"
+                  />
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Content>
+                  <DropdownMenu.Item>{data.user?.email}</DropdownMenu.Item>
+                  <DropdownMenu.Separator />
+                  <DropdownMenu.Item color="red">
+                    <Link href={"/api/auth/signout"}>Logout</Link>
+                  </DropdownMenu.Item>
+                </DropdownMenu.Content>
+              </DropdownMenu.Root>
+
             }
             {
               status === "unauthenticated" && <Link href={"/api/auth/signin"}>Login</Link>
