@@ -6,8 +6,6 @@ import IssueForm from "../../_components/IssueForm";
 const EditIssuePage = async ({ params }: {params: { id: string }}) => {
     const { id } = await params
 
-    // if (typeof parseInt(id) !== 'number') return notFound()
-
     const issue = await prisma.issue.findUnique({
         where: { id: +id }
     })

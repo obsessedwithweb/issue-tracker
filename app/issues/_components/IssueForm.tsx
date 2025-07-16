@@ -8,15 +8,21 @@ import { Button, Callout, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import { Ripples } from 'ldrs/react';
 import { Info, MoveLeft } from "lucide-react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from 'react';
 import { Controller, useForm } from "react-hook-form";
-import SimpleMDE from 'react-simplemde-editor';
 import { z } from 'zod';
+import LoadingSimpleMDE from "./LoadingSimpleMDE";
 
 import "easymde/dist/easymde.min.css";
 import 'ldrs/react/Ripples.css';
+
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), {
+    ssr: false,
+    loading: () => <LoadingSimpleMDE />
+});
 
 type IssueForm = z.infer<typeof issueShcema>
 
