@@ -18,14 +18,13 @@ const IssuesTableHeader = () => {
         { label: "Created At", value: "createdAt", className: "hidden md:table-cell" },
     ]
     return (
-        <Table.Header>
+        <Table.Header className="transition-all">
             <Table.Row>
                 {columns.map((column) => (
                     <Table.ColumnHeaderCell
                         className={column.className}
                         key={column.value} >
                         <Flex gap='2'>
-
                             <Link href={{
                                 query: {
                                     status,
@@ -37,7 +36,6 @@ const IssuesTableHeader = () => {
                             {column.value === orderBy && <ArrowBigUp fill="white" className="" />}
                         </Flex>
                     </Table.ColumnHeaderCell>
-
                 ))}
             </Table.Row>
         </Table.Header>
