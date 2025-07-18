@@ -1,85 +1,91 @@
-'use server'
+"use server";
 
 import authOptions from "@/app/auth/authOptions";
-import { patchIssueSchema } from "@/lib/validateSchemas";
-import { prisma } from "@/prisma/client";
-import { getServerSession } from "next-auth";
-import { revalidatePath } from "next/cache";
-import { NextRequest, NextResponse } from "next/server";
+import {patchIssueSchema} from "@/lib/validateSchemas";
+import {prisma} from "@/prisma/client";
+import {getServerSession} from "next-auth";
+import {revalidatePath} from "next/cache";
+import {NextRequest, NextResponse} from "next/server";
 
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    {params}: { params: { id: string } },
 ) {
-    const session = await getServerSession(authOptions)
-    if (!session) return NextResponse.json({}, { status: 401 })
+    // const session = await getServerSession(authOptions)
+    // if (!session) return NextResponse.json({}, { status: 401 })
 
-    const { id } = await params
+    const {id} = await params;
+
+    if (!id)
+        return NextResponse.json(
+            {error: "Invalid issueId requested!"},
+            {status: 404},
+        );
 
     const issue = await prisma.issue.findUnique({
-        where: { id: +id }
-    })
+        where: {id: +id},
+    });
 
     if (!issue)
-        return NextResponse.json({ error: 'Invalid Id requested!' }, { status: 404 })
+        return NextResponse.json(
+            {error: "Invalid issueId requested!"},
+            {status: 404},
+        );
 
-    const body = await request.json()
-    const validation = patchIssueSchema.safeParse(body)
+    const body = await request.json();
+    const validation = patchIssueSchema.safeParse(body);
 
     if (!validation.success)
-        return NextResponse.json(validation.error.format(), { status: 400 })
+        return NextResponse.json(validation.error.issues, {status: 400});
 
-    const {title, description, assignedUserId} = body
+    const {title, description, assignedUserId} = body;
 
-    if(assignedUserId) {
+    if (assignedUserId) {
         const user = await prisma.user.findUnique({
-            where: {id: assignedUserId}
-        })
-        if (!user) {
-            return NextResponse.json({error: 'User not found!'}, {status: 401})
-        }
+            where: {id: assignedUserId},
+        });
+        if (!user)
+            return NextResponse.json({error: "User not found!"}, {status: 400});
     }
 
+    const updatedIssue = await prisma.issue.update({
+        where: {id: issue.id},
+        data: {
+            title,
+            description,
+            assignedUserId
+        },
+    });
+    revalidatePath("/issues");
 
-    const updatedIssue = await prisma.issue.update(
-        {
-            where: { id: issue.id },
-            data: {
-                title,
-                description,
-                assignedUserId
-            }
-        }
-    )
-    revalidatePath('/issues')
-
-    return NextResponse.json(updatedIssue)
-
+    return NextResponse.json(updatedIssue);
 }
 
 export const DELETE = async (
     request: NextRequest,
-    { params }: { params: { id: string } }
+    {params}: { params: { id: string } },
 ) => {
-    const session = await getServerSession(authOptions)
-    if (!session) return NextResponse.json({}, { status: 401 })
-        
-    const { id } = await params
+    const session = await getServerSession(authOptions);
+    if (!session) return NextResponse.json({}, {status: 401});
+
+    const {id} = await params;
 
     const issue = await prisma.issue.findUnique({
-        where: { id: +id }
-    })
+        where: {id: +id},
+    });
 
     if (!issue)
-        return NextResponse.json({ error: 'Invalid Id requested!' }, { status: 404 })
-
+        return NextResponse.json(
+            {error: "Invalid Id requested!"},
+            {status: 404},
+        );
 
     await prisma.issue.delete({
         where: {
-            id: issue.id
-        }
-    })
+            id: issue.id,
+        },
+    });
 
-    revalidatePath("/issues")
-    return NextResponse.json({})
-}
+    revalidatePath("/issues");
+    return NextResponse.json({});
+};
