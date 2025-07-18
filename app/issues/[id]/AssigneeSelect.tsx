@@ -1,8 +1,8 @@
 "use client";
+import { instance as axios } from "@/lib/axios-instance";
 import { Issue, User } from "@prisma/client";
 import { Select, Skeleton } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
-import { instance as axios } from "@/lib/axios-instance";
 import toast, { Toaster } from "react-hot-toast";
 
 const AssigneeSelect = ({ issue }: { issue: Issue }) => {
@@ -10,12 +10,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
     data: users,
     error,
     isFetching,
-  } = useQuery<User[]>({
-    queryKey: ["users"],
-    queryFn: () => axios.get("/api/users").then((res) => res.data),
-    staleTime: 60 * 1000,
-    retry: 3,
-  });
+  } = useUsers();
 
   if (isFetching) return <Skeleton height="2rem" />;
   if (error) return null;
@@ -60,5 +55,12 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
     </>
   );
 };
+
+const useUsers = () => useQuery<User[]>({
+  queryKey: ["users"],
+  queryFn: () => axios.get("/api/users").then((res) => res.data),
+  staleTime: 60 * 1000,
+  retry: 3,
+});
 
 export default AssigneeSelect;
