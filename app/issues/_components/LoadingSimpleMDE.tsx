@@ -1,7 +1,6 @@
 import {Flex, Skeleton} from "@radix-ui/themes";
 
 
-
 const LoadingSimpleMDE = () => {
   return (
         <Flex direction='column' gap='4' className="max-w-xl">

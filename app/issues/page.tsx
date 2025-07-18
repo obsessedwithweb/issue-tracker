@@ -1,4 +1,5 @@
-import { ActionIssueButton, IssueStatusBadge } from "@/components/UI";
+import { IssueStatusBadge } from "@/components/UI";
+import {ActionIssueButton} from "./_components"
 import Link from "@/components/UI/Link";
 import { prisma } from "@/prisma/client";
 import { Table } from "@radix-ui/themes";

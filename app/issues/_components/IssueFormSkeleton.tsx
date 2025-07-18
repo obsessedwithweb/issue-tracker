@@ -1,4 +1,4 @@
-import {Flex, Button, Skeleton} from "@radix-ui/themes";
+import {Button, Flex, Skeleton} from "@radix-ui/themes";
 import {MoveLeft} from "lucide-react";
 import Link from "next/link";
 

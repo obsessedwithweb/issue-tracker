@@ -1,5 +1,5 @@
 import {Skeleton, Table} from "@radix-ui/themes";
-import {ActionIssueButton} from "@/components/UI";
+import {ActionIssueButton} from "@/app/issues/_components";
 
 
 const LoadingIssue = () => {
