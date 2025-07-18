@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Box, Button, Container, DropdownMenu, Flex, Skeleton } from "@radix-ui/themes";
+import { Avatar, Box, Container, DropdownMenu, Flex, Skeleton } from "@radix-ui/themes";
 import classNames from "classnames";
 import { Bug } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -24,7 +24,7 @@ function NavBar() {
           <Flex gap='8' align='center'>
             <Link
               href="/"
-              className={`text-zinc-900 hover:text-zinc-600 transition-colors`}
+              className={`text-zinc-900 hover:text-zinc-600 dark:text-zinc-200 transition-colors`}
             >
               <Bug />
             </Link>
@@ -52,7 +52,7 @@ const NavLinks = () => {
           <Link
             className={classNames({
               "nav-link": true,
-              "!text-slate-950": currentPath === link.href,
+              "!text-slate-950 dark:!text-zinc-200": currentPath === link.href,
             })}
             href={link.href}
           >

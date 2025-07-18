@@ -3,7 +3,7 @@ import "./globals.css";
 import './theme-config.css';
 
 import { NavBar } from "@/components/UI";
-import { Container, Theme } from "@radix-ui/themes";
+import { Container, Theme, ThemePanel } from "@radix-ui/themes";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Parkinsans } from "next/font/google";
 import AuthProvider from "./auth/Provider";
@@ -40,7 +40,7 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} ${parkinSans.variable} antialiased`} >
                 <ReactQueryClientProvider>
                     <AuthProvider>
-                        <Theme accentColor="violet" grayColor="olive" radius="large">
+                        <Theme accentColor="violet" grayColor="sand" radius="large" scaling="110%" appearance="dark">
                             <NavBar />
                             <main className={`px-5`}>
                                 <Container>
