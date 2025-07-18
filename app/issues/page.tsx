@@ -1,35 +1,40 @@
 import { IssueStatusBadge } from "@/components/UI";
-import {ActionIssueButton} from "./_components"
 import Link from "@/components/UI/Link";
 import { prisma } from "@/prisma/client";
+import { Issue, Status } from "@prisma/client";
 import { Table } from "@radix-ui/themes";
-import { Status } from "@prisma/client";
+import { ActionIssueButton, IssuesTableHeader } from "./_components";
 
-type SearchParams = Promise<{status: Status}>
+type SearchParams = Promise<{ status: Status, orderBy: keyof Issue }>
 
-const IssuesPage = async ({searchParams}: {searchParams: SearchParams}) => {
-    let {status} = await searchParams
+const IssuesPage = async ({ searchParams }: { searchParams: SearchParams }) => {
+    const { status } = await searchParams
+    const { orderBy } = await searchParams
 
     const statusList = Object.values(Status)
-    const isStatusExists = statusList.includes(status)
-    
+    const isStatusExists = statusList.includes(status!)
+
+    let orderParams: string[] = ["ID", "Issue", "Status", "Created At"]
     
     const issues = await prisma.issue.findMany({
         where: {
             status: isStatusExists ? status : undefined,
-        }
+        },
+        ...(orderBy && orderParams.includes(orderBy)
+            ? {
+                orderBy: {
+                    [orderBy]: 'asc',
+                },
+            }
+            : {}),
     })
+
+
+
     return <div >
         <ActionIssueButton />
         <Table.Root variant="surface">
-            <Table.Header>
-                <Table.Row>
-                    <Table.ColumnHeaderCell>Id</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell className="hidden md:table-cell">Status</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell className="hidden md:table-cell">Created at</Table.ColumnHeaderCell>
-                </Table.Row>
-            </Table.Header>
+            <IssuesTableHeader />
             <Table.Body>
                 {issues.map(issue => (
                     <Table.Row key={issue.id}>

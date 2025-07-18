@@ -12,6 +12,7 @@
 *.yml
 *.yaml
 pnpm-lock.yaml
+.vscode/
 
 # testing
 /coverage
