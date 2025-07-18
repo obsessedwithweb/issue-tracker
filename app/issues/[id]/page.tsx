@@ -10,11 +10,9 @@ import DeleteIssueButton from "./DeleteIssueButton"
 import EditIssueButton from "./EditIssueButton"
 import IssueDetails from "./IssueDetails"
 
-interface Props {
-    params: { id: string }
-}
+type Params =  Promise<{id: string}>
 
-const IssueDetail = async ({ params }: Props) => {
+const IssueDetail = async ({ params }: {params: Params}) => {
     const { id } = await params
     const session = await getServerSession(authOptions)
     // const { data } = await axios.get<User[]>('/api/users')

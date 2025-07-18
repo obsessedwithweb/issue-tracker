@@ -3,12 +3,22 @@ import {ActionIssueButton} from "./_components"
 import Link from "@/components/UI/Link";
 import { prisma } from "@/prisma/client";
 import { Table } from "@radix-ui/themes";
+import { Status } from "@prisma/client";
 
+type SearchParams = Promise<{status: Status}>
 
+const IssuesPage = async ({searchParams}: {searchParams: SearchParams}) => {
+    let {status} = await searchParams
 
-const IssuesPage = async () => {
+    const statusList = Object.values(Status)
+    const isStatusExists = statusList.includes(status)
     
-    const issues = await prisma.issue.findMany()
+    
+    const issues = await prisma.issue.findMany({
+        where: {
+            status: isStatusExists ? status : undefined,
+        }
+    })
     return <div >
         <ActionIssueButton />
         <Table.Root variant="surface">
