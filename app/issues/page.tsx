@@ -18,7 +18,7 @@ const IssuesPage = async ({ searchParams }: { searchParams: SearchParams }) => {
 
     const orderParams: string[] = ["ID", "Issue", "Status", "Created At"]
 
-    const pageSize = 2
+    const pageSize = 8
 
     const issues = await prisma.issue.findMany({
         where,
@@ -35,7 +35,7 @@ const IssuesPage = async ({ searchParams }: { searchParams: SearchParams }) => {
 
     const issuesCount = await prisma.issue.count({ where, })
 
-    return <Flex direction='column' gap='8' >
+    return <Flex direction='column' gap='6' mb='8'>
         <ActionIssueButton />
         <IssuesTable issues={issues} />
         <Pagination
