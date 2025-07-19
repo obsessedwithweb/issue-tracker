@@ -7,9 +7,11 @@ import {getServerSession} from "next-auth";
 import {revalidatePath} from "next/cache";
 import {NextRequest, NextResponse} from "next/server";
 
+type IssueProps = Promise<{id: string}>
+
 export async function PATCH(
     request: NextRequest,
-    {params}: { params: { id: string } },
+    {params}: { params: IssueProps },
 ) {
     // const session = await getServerSession(authOptions)
     // if (!session) return NextResponse.json({}, { status: 401 })
@@ -63,7 +65,7 @@ export async function PATCH(
 
 export const DELETE = async (
     request: NextRequest,
-    {params}: { params: { id: string } },
+    {params}: { params: IssueProps },
 ) => {
     const session = await getServerSession(authOptions);
     if (!session) return NextResponse.json({}, {status: 401});
