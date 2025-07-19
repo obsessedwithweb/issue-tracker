@@ -24,12 +24,12 @@ const IssueStatusFilter = () => {
             defaultValue={status || 'ALL'}
             onValueChange={(status) => {
                 const params = new URLSearchParams()
-                status && status!=='ALL' && params.append('status', status)
+                
+                status && status !== 'ALL' && params.append('status', status)
                 orderBy && params.append('orderBy', orderBy)
                 page && params.append('page', page)
-                // const statusQuery = status === 'ALL' ? '' : `?status=${status}`
-                // const orderQuery = orderBy ? `&orderBy=${orderBy}` : ''
-                const query = params.size ? `?${params.toString()}`:""
+
+                const query = params.size ? `?${params.toString()}` : ""
                 router.push('/issues' + query)
             }}
         >
