@@ -24,10 +24,10 @@ const IssueStatusFilter = () => {
             defaultValue={status || 'ALL'}
             onValueChange={(status) => {
                 const params = new URLSearchParams()
-                
+
                 status && status !== 'ALL' && params.append('status', status)
                 orderBy && params.append('orderBy', orderBy)
-                page && params.append('page', page)
+                page && params.append('page', '1')
 
                 const query = params.size ? `?${params.toString()}` : ""
                 router.push('/issues' + query)
