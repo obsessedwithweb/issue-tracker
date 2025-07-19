@@ -32,3 +32,6 @@ body {
         @apply text-zinc-600 dark:text-zinc-400 hover:text-zinc-200 transition-colors
     }
 }
+
+@source inline("{hover:,}text-{red,fuchsia,teal}-600");
+@source inline("{hover:,}bg-{red,fuchsia,teal}-200/20");
