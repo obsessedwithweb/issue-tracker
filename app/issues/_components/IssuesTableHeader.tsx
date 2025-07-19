@@ -10,7 +10,9 @@ const IssuesTableHeader = () => {
     const searchParams = useSearchParams()
     const status = searchParams.get('status')
     const orderBy = searchParams.get('orderBy')
+    const page = searchParams.get('page')
 
+    console.log(page)
     const columns: { label: string, value: keyof Issue, className?: string }[] = [
         { label: "ID", value: "id" },
         { label: "Issue", value: "title" },
@@ -27,8 +29,9 @@ const IssuesTableHeader = () => {
                         <Flex gap='2'>
                             <Link href={{
                                 query: {
-                                    status,
-                                    orderBy: column.value
+                                    status,                                    
+                                    orderBy: column.value,
+                                    page: page === null ? 1 : page
                                 }
                             }} >
                                 {column.label}

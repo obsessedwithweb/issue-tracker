@@ -16,6 +16,7 @@ const IssueStatusFilter = () => {
     const searchParams = useSearchParams()
     const status = searchParams.get('status')
     const orderBy = searchParams.get('orderBy')
+    const page = searchParams.get('page')
 
 
     return (
@@ -25,6 +26,7 @@ const IssueStatusFilter = () => {
                 const params = new URLSearchParams()
                 status && status!=='ALL' && params.append('status', status)
                 orderBy && params.append('orderBy', orderBy)
+                page && params.append('page', page)
                 // const statusQuery = status === 'ALL' ? '' : `?status=${status}`
                 // const orderQuery = orderBy ? `&orderBy=${orderBy}` : ''
                 const query = params.size ? `?${params.toString()}`:""

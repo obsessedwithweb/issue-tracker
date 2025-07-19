@@ -6,19 +6,19 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { number } from "zod"
 
 type PaginationProps = {
-    ItemCount: number,
-    PageSize: number,
-    CurrentPage: number,
+    itemCount: number,
+    pageSize: number,
+    currentPage: number,
 }
 
-const Pagination = ({ ItemCount, PageSize, CurrentPage }: PaginationProps) => {
+const Pagination = ({ itemCount, pageSize, currentPage }: PaginationProps) => {
     const router = useRouter()
     const searchParams = useSearchParams()
 
-    const pageCount = Math.ceil(ItemCount / PageSize)
-    if (pageCount <= 1 || CurrentPage <=0) return null
+    const pageCount = Math.ceil(itemCount / pageSize)
+    if (pageCount <= 1 || currentPage <=0) return null
     
-    CurrentPage = isNaN(CurrentPage) ? 1 : CurrentPage
+    currentPage = isNaN(currentPage) ? 1 : currentPage
 
 
     const changePage = (pageNum: number) => {
@@ -34,29 +34,29 @@ const Pagination = ({ ItemCount, PageSize, CurrentPage }: PaginationProps) => {
                 variant="soft"
                 color="gray"
                 onClick={() => changePage(1)}
-                disabled={CurrentPage === 1}>
+                disabled={currentPage === 1}>
                 <ChevronsLeft />
             </Button>
             <Button
                 variant="soft"
                 color="gray"
-                onClick={() => changePage(CurrentPage - 1)}
-                disabled={CurrentPage === 1}>
+                onClick={() => changePage(currentPage - 1)}
+                disabled={currentPage === 1}>
                 <ChevronLeft />
             </Button>
-            <Text size="2">Page {CurrentPage} of {pageCount}</Text>
+            <Text size="2">Page {currentPage} of {pageCount}</Text>
             <Button
                 variant="soft"
                 color="gray"
-                onClick={() => changePage(CurrentPage + 1)}
-                disabled={CurrentPage === pageCount}>
+                onClick={() => changePage(currentPage + 1)}
+                disabled={currentPage === pageCount}>
                 <ChevronRight />
             </Button>
             <Button
                 variant="soft"
                 color="gray"
                 onClick={() => changePage(pageCount)}
-                disabled={CurrentPage === pageCount}>
+                disabled={currentPage === pageCount}>
                 <ChevronsRight />
             </Button>
 

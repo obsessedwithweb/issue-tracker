@@ -2,24 +2,27 @@ import { IssueStatusBadge } from "@/components/UI";
 import Link from "@/components/UI/Link";
 import { prisma } from "@/prisma/client";
 import { Issue, Status } from "@prisma/client";
-import { Table } from "@radix-ui/themes";
+import { Flex, Table } from "@radix-ui/themes";
 import { ActionIssueButton, IssuesTableHeader } from "./_components";
+import Pagination from "@/components/UI/Pagination";
 
-type SearchParams = Promise<{ status: Status, orderBy: keyof Issue }>
+type SearchParams = Promise<{ status: Status, orderBy: keyof Issue, page: string }>
 
 const IssuesPage = async ({ searchParams }: { searchParams: SearchParams }) => {
     const { status } = await searchParams
     const { orderBy } = await searchParams
-
+    let { page } = await searchParams
+    page = page ?? 1
     const statusList = Object.values(Status)
     const isStatusExists = statusList.includes(status!)
+    const where = { status: isStatusExists ? status : undefined, }
 
-    let orderParams: string[] = ["ID", "Issue", "Status", "Created At"]
-    
+    const orderParams: string[] = ["ID", "Issue", "Status", "Created At"]
+
+    const pageSize = 10
+
     const issues = await prisma.issue.findMany({
-        where: {
-            status: isStatusExists ? status : undefined,
-        },
+        where,
         ...(orderBy && orderParams.includes(orderBy)
             ? {
                 orderBy: {
@@ -27,11 +30,13 @@ const IssuesPage = async ({ searchParams }: { searchParams: SearchParams }) => {
                 },
             }
             : {}),
+        take: pageSize,
+        skip: (+page - 1) * pageSize,
     })
 
+    const issuesCount = await prisma.issue.count({ where, })
 
-
-    return <div >
+    return <Flex direction='column' gap='8' >
         <ActionIssueButton />
         <Table.Root variant="surface">
             <IssuesTableHeader />
@@ -55,7 +60,8 @@ const IssuesPage = async ({ searchParams }: { searchParams: SearchParams }) => {
                 ))}
             </Table.Body>
         </Table.Root>
-    </div >;
+        <Pagination itemCount={issuesCount} pageSize={pageSize} currentPage={+page} />
+    </Flex >;
 };
 
 export default IssuesPage;
