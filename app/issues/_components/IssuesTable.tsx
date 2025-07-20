@@ -2,7 +2,7 @@ import { IssueStatusBadge } from "@/components/UI"
 import { Issue } from "@prisma/client"
 import { Table } from "@radix-ui/themes"
 import Link from "next/link"
-import IssuesTableHeader from "./IssuesTableHeader"
+import {IssuesTableHeader} from "."
 
 
 const IssuesTable = ({ issues }: { issues: Issue[] }) => {
