@@ -12,8 +12,8 @@ const ToggleTheme = ({ children }: PropsWithChildren) => {
             <NavBar>
                 {
                     theme === 'dark' ?
-                        <SunMedium onClick={() => setTheme('light')} />
-                        : <MoonStar onClick={() => setTheme('dark')} />
+                        <SunMedium cursor='pointer' onClick={() => setTheme('light')} />
+                        : <MoonStar cursor='pointer' onClick={() => setTheme('dark')} />
                 }
             </NavBar>
             {children}

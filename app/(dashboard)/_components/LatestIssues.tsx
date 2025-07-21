@@ -20,7 +20,7 @@ const LatestIssues = async () => {
                 <Table.Body >
                     {
                         issues.map(issue => (
-                            <Table.Row key={issue.id} className="hover:bg-rose-400/20 transition-colors" >
+                            <Table.Row key={issue.id} className="dark:hover:bg-rose-400/20 hover:bg-rose-400/10 transition-colors" >
                                 <Table.Cell >
                                     <Flex justify='between' align='center' >
                                         <Flex direction='column' align='start' gap='3' >
