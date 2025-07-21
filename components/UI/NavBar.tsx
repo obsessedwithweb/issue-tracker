@@ -1,11 +1,12 @@
 "use client";
 
-import {Avatar, Box, Container, DropdownMenu, Flex, Skeleton} from "@radix-ui/themes";
+import { Avatar, Box, Container, DropdownMenu, Flex, Skeleton } from "@radix-ui/themes";
 import classNames from "classnames";
-import {Bug} from "lucide-react";
-import {useSession} from "next-auth/react";
+import { Bug } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
 
 type Link = {
   label: string;
@@ -13,7 +14,7 @@ type Link = {
 };
 
 
-function NavBar() {
+function NavBar({ children }: { children?: ReactNode }) {
 
   return (
     <nav
@@ -30,7 +31,10 @@ function NavBar() {
             </Link>
             <NavLinks />
           </Flex>
-          <AuthStatus />
+          <Flex align={'center'} gap='4'>
+            {children}
+            <AuthStatus />
+          </Flex>
         </Flex>
       </Container>
     </nav>
@@ -52,7 +56,7 @@ const NavLinks = () => {
           <Link
             className={classNames({
               "nav-link": true,
-              "!text-slate-950 dark:!text-zinc-200": currentPath === link.href,
+              "active": currentPath === link.href,
             })}
             href={link.href}
           >

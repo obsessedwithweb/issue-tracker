@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
     --background: #ffffff;
     --foreground: #171717;
@@ -23,13 +25,19 @@
 
 body {
     color: var(--foreground);
-    /* font-family: var(--font-parkinsans); */
+}
+
+body, body * {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 
-@layer utilities {
+@layer components {
     .nav-link {
-        @apply text-zinc-600 dark:text-zinc-400 hover:text-zinc-200 transition-colors
+        @apply text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors
+    }
+    .active {
+        @apply text-zinc-700 dark:text-zinc-200 hover:text-zinc-700 dark:hover:text-zinc-200
     }
 }
 

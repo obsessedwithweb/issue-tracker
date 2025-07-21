@@ -1,3 +1,4 @@
+export { default as ToggleTheme} from './ToggleTheme'
 export { default as Link} from './Link'
 export { default as NavBar } from './NavBar'
 export { default as ErrorMessage } from './ErrorMessage'
