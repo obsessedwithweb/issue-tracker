@@ -1,6 +1,6 @@
 "use client";
 
-import {ErrorMessage} from "@/components/UI";
+import {BackButton, ErrorMessage} from "@/components/UI";
 import {issueSchema} from "@/lib/validateSchemas";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Issue} from "@prisma/client";
@@ -49,11 +49,9 @@ export default function NewIssue({issue}: { issue?: Issue }) {
 
     return (
         <div className='max-w-xl flex flex-col gap-3 mb-5' >
-            <Link href={`/issues`} className="" >
-                <Button className="" >
-                    <MoveLeft />
-                </Button >
-            </Link >
+            {/* <Link href={`/issues`} className="" > */}
+                <BackButton/>
+            {/* </Link > */}
             {
                 error && <Callout.Root color='red' >
                     <Callout.Icon >

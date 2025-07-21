@@ -1,15 +1,10 @@
-import {Button, Card, Flex, Skeleton} from '@radix-ui/themes'
-import {MoveLeft} from 'lucide-react'
-import Link from "next/link"
+import { BackButton } from '@/components/UI'
+import { Card, Flex, Skeleton } from '@radix-ui/themes'
 
 const IssueDetailLoading = () => {
     return (
         <Flex className="max-w-xl hover:content-['Back']" direction='column' gap='4' >
-            <Link href={`/issues`} >
-                <Button className="" >
-                    <MoveLeft />
-                </Button >
-            </Link >
+            <BackButton />
             <Skeleton height='2rem' />
             <Flex gap='2' my='2' >
                 <Skeleton width={'4rem'} /> {/* Badge */}
