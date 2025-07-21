@@ -12,7 +12,6 @@ const IssuesTableHeader = () => {
     const orderBy = searchParams.get('orderBy')
     const page = searchParams.get('page')
 
-    console.log(page)
     const columns: { label: string, value: keyof Issue, className?: string }[] = [
         {label: "ID", value: "id"},
         {label: "Issue", value: "title"},
