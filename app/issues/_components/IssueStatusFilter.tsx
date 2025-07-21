@@ -5,10 +5,10 @@ import {useRouter, useSearchParams} from "next/navigation"
 
 
 const statuses: { label: string, value?: Status }[] = [
-    { label: "All" },
-    { label: "Open", value: "OPEN" },
-    { label: "In progress", value: "IN_PROGRESS" },
-    { label: "Closed", value: "CLOSED" },
+    {label: "All"},
+    {label: "Open", value: "OPEN"},
+    {label: "In progress", value: "IN_PROGRESS"},
+    {label: "Closed", value: "CLOSED"},
 ]
 
 const IssueStatusFilter = () => {
@@ -24,7 +24,7 @@ const IssueStatusFilter = () => {
             defaultValue={status || 'ALL'}
             onValueChange={(status) => {
                 const params = new URLSearchParams()
-                
+
                 status && status !== 'ALL' && params.append('status', status)
                 orderBy && params.append('orderBy', orderBy)
                 page && params.append('page', '1')
@@ -34,14 +34,14 @@ const IssueStatusFilter = () => {
             }}
         >
             <Select.Trigger placeholder="Filter by status..." />
-            <Select.Content>
+            <Select.Content >
                 {statuses.map(item =>
-                    <Select.Item key={item.label} value={item.value || "ALL"}>
+                    <Select.Item key={item.label} value={item.value || "ALL"} >
                         {item.label}
-                    </Select.Item>
+                    </Select.Item >
                 )}
-            </Select.Content>
-        </Select.Root>
+            </Select.Content >
+        </Select.Root >
     )
 }
 

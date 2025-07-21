@@ -1,6 +1,6 @@
 import {unstable_cache as nextCache} from "next/cache";
 import {prisma} from "@/prisma/client";
-import { Status } from "@prisma/client";
+import {Status} from "@prisma/client";
 
 
 export const getAllIssues = nextCache(

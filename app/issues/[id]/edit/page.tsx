@@ -1,5 +1,5 @@
-import { getIssueById } from "@/lib/fetchTools";
-import { notFound } from "next/navigation";
+import {getIssueById} from "@/lib/fetchTools";
+import {notFound} from "next/navigation";
 import IssueForm from "../../_components/IssueForm";
 
 
@@ -17,8 +17,8 @@ export async function generateMetadata({params}: { params: Params }) {
 }
 
 
-const EditIssuePage = async ({ params }: { params: Params }) => {
-    const { id } = await params
+const EditIssuePage = async ({params}: { params: Params }) => {
+    const {id} = await params
 
     const issue = await getIssueById(+id)
 

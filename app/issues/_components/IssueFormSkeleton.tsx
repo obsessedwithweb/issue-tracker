@@ -5,12 +5,12 @@ import Link from "next/link";
 
 const IssueFormSkeleton = () => {
     return (
-        <Flex direction='column' gap='4' className="max-w-xl">
+        <Flex direction='column' gap='4' className="max-w-xl" >
             <Link href={`/issues`} >
-                <Button className="">
+                <Button className="" >
                     <MoveLeft />
-                </Button>
-            </Link>
+                </Button >
+            </Link >
             <Skeleton height='2rem' />
             <Skeleton height='25rem' />
         </Flex >

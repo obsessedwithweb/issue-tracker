@@ -1,6 +1,6 @@
-import { IssueStatusBadge } from "@/components/UI"
-import { getAllIssuesWithAssignee } from "@/lib/fetchTools"
-import { Avatar, Card, Flex, Heading, Table } from "@radix-ui/themes"
+import {IssueStatusBadge} from "@/components/UI"
+import {getAllIssuesWithAssignee} from "@/lib/fetchTools"
+import {Avatar, Card, Flex, Heading, Table} from "@radix-ui/themes"
 import Link from "next/link"
 
 
@@ -15,20 +15,20 @@ const LatestIssues = async () => {
 
     return (
         <Card >
-            <Heading size='5' mb="5">Latest Issues</Heading>
-            <Table.Root>
-                <Table.Body>
+            <Heading size='5' mb="5" >Latest Issues</Heading >
+            <Table.Root >
+                <Table.Body >
                     {
                         issues.map(issue => (
-                            <Table.Row key={issue.id} className="hover:bg-rose-400/20 transition-colors">
-                                <Table.Cell>
-                                    <Flex justify='between' align='center'>
-                                        <Flex direction='column' align='start' gap='3'>
-                                            <Link href={`/issues/${issue.id}`}>
+                            <Table.Row key={issue.id} className="hover:bg-rose-400/20 transition-colors" >
+                                <Table.Cell >
+                                    <Flex justify='between' align='center' >
+                                        <Flex direction='column' align='start' gap='3' >
+                                            <Link href={`/issues/${issue.id}`} >
                                                 {issue.title}
-                                            </Link>
+                                            </Link >
                                             <IssueStatusBadge status={issue.status} />
-                                        </Flex>
+                                        </Flex >
                                         {issue.assignedUser &&
                                             <Avatar
                                                 src={issue.assignedUser.image!}
@@ -36,14 +36,14 @@ const LatestIssues = async () => {
                                                 size='2'
                                                 radius="full" />
                                         }
-                                    </Flex>
-                                </Table.Cell>
-                            </Table.Row>
+                                    </Flex >
+                                </Table.Cell >
+                            </Table.Row >
                         ))
                     }
-                </Table.Body>
-            </Table.Root>
-        </Card>
+                </Table.Body >
+            </Table.Root >
+        </Card >
     )
 }
 

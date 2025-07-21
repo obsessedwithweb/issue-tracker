@@ -14,34 +14,34 @@ const IssuesTableHeader = () => {
 
     console.log(page)
     const columns: { label: string, value: keyof Issue, className?: string }[] = [
-        { label: "ID", value: "id" },
-        { label: "Issue", value: "title" },
-        { label: "Status", value: "status", className: "hidden md:table-cell" },
-        { label: "Created At", value: "createdAt", className: "hidden md:table-cell" },
+        {label: "ID", value: "id"},
+        {label: "Issue", value: "title"},
+        {label: "Status", value: "status", className: "hidden md:table-cell"},
+        {label: "Created At", value: "createdAt", className: "hidden md:table-cell"},
     ]
     return (
-        <Table.Header className="transition-all">
-            <Table.Row>
+        <Table.Header className="transition-all" >
+            <Table.Row >
                 {columns.map((column) => (
                     <Table.ColumnHeaderCell
                         className={column.className}
                         key={column.value} >
-                        <Flex gap='2'>
+                        <Flex gap='2' >
                             <Link href={{
                                 query: {
-                                    status,                                    
+                                    status,
                                     orderBy: column.value,
                                     page: page === null ? 1 : page
                                 }
                             }} >
                                 {column.label}
-                            </Link>
+                            </Link >
                             {column.value === orderBy && <ArrowBigUp fill="white" className="" />}
-                        </Flex>
-                    </Table.ColumnHeaderCell>
+                        </Flex >
+                    </Table.ColumnHeaderCell >
                 ))}
-            </Table.Row>
-        </Table.Header>
+            </Table.Row >
+        </Table.Header >
     )
 }
 

@@ -26,7 +26,7 @@ const LoadingIssue = () => {
                             <Table.Cell className="hidden md:table-cell" >
                                 <Skeleton />
                             </Table.Cell >
-                            <Table.Cell className="hidden md:table-cell">
+                            <Table.Cell className="hidden md:table-cell" >
                                 <Skeleton />
                             </Table.Cell >
                         </Table.Row >

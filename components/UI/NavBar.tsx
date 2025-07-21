@@ -1,11 +1,11 @@
 "use client";
 
-import { Avatar, Box, Container, DropdownMenu, Flex, Skeleton } from "@radix-ui/themes";
+import {Avatar, Box, Container, DropdownMenu, Flex, Skeleton} from "@radix-ui/themes";
 import classNames from "classnames";
-import { Bug } from "lucide-react";
-import { useSession } from "next-auth/react";
+import {Bug} from "lucide-react";
+import {useSession} from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import {usePathname} from "next/navigation";
 
 type Link = {
   label: string;

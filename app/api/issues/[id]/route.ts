@@ -4,10 +4,10 @@ import authOptions from "@/app/auth/authOptions";
 import {patchIssueSchema} from "@/lib/validateSchemas";
 import {prisma} from "@/prisma/client";
 import {getServerSession} from "next-auth";
-import {revalidatePath} from "next/cache";
+import {revalidateTag} from "next/cache";
 import {NextRequest, NextResponse} from "next/server";
 
-type IssueProps = Promise<{id: string}>
+type IssueProps = Promise<{ id: string }>
 
 export async function PATCH(
     request: NextRequest,
@@ -58,7 +58,13 @@ export async function PATCH(
             assignedUserId
         },
     });
-    revalidatePath("/issues");
+    revalidateTag('allIssues')
+    revalidateTag('issueId')
+
+    revalidateTag('allIssuesWithAssignee')
+    // revalidatePath("/issues");
+    // revalidatePath('/(dashboard)/', 'page')
+    // revalidatePath('/', 'layout')
 
     return NextResponse.json(updatedIssue);
 }
@@ -88,6 +94,11 @@ export const DELETE = async (
         },
     });
 
-    revalidatePath("/issues");
+    revalidateTag('allIssues')
+    revalidateTag('issueId')
+
+    revalidateTag('statusCount')
+    revalidateTag('allIssuesWithAssignee')
+    // revalidatePath('/(dashboard)/', 'page')
     return NextResponse.json({});
 };

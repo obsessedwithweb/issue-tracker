@@ -1,5 +1,5 @@
-import { getIssueById } from '@/lib/fetchTools';
-import { PropsWithChildren } from 'react';
+import {getIssueById} from '@/lib/fetchTools';
+import {PropsWithChildren} from 'react';
 
 type Props = Promise<{ id: string }>
 

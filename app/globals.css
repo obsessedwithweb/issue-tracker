@@ -34,4 +34,4 @@ body {
 }
 
 @source inline("{hover:,}text-{red,fuchsia,teal}-600");
-@source inline("{hover:,}bg-{red,fuchsia,teal}-200/20");
+@source inline("{hover:,}bg-{red,fuchsia,teal}-400/20");
