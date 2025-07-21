@@ -1,19 +1,19 @@
 "use client";
 
-import {ErrorMessage} from "@/components/UI";
-import {issueSchema} from "@/lib/validateSchemas";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {Issue} from "@prisma/client";
-import {Button, Callout, TextField} from "@radix-ui/themes";
+import { ErrorMessage } from "@/components/UI";
+import { issueSchema } from "@/lib/validateSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Issue } from "@prisma/client";
+import { Button, Callout, TextField } from "@radix-ui/themes";
 import axios from "axios";
-import {Ripples} from 'ldrs/react';
-import {Info, MoveLeft} from "lucide-react";
+import { Ripples } from 'ldrs/react';
+import { Info, MoveLeft } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import {useRouter} from "next/navigation";
-import {useState} from 'react';
-import {Controller, useForm} from "react-hook-form";
-import {z} from 'zod';
+import { useRouter } from "next/navigation";
+import { useState } from 'react';
+import { Controller, useForm } from "react-hook-form";
+import { z } from 'zod';
 import LoadingSimpleMDE from "./LoadingSimpleMDE";
 
 import "easymde/dist/easymde.min.css";
@@ -35,9 +35,10 @@ export default function NewIssue({ issue }: { issue?: Issue }) {
 
     const onSubmit = async (data: IssueForm) => {
         try {
-            issue ?
+            if (issue)
                 await axios.patch('/api/issues/' + issue.id, data)
-                : await axios.post('/api/issues', data)
+            else
+                await axios.post('/api/issues', data)
             router.push('/issues')
         } catch (_) {
             setError("Check entered values ")

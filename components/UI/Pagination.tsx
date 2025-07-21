@@ -1,9 +1,8 @@
 'use client'
 
-import { Flex, Text, Button } from "@radix-ui/themes"
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { number } from "zod"
+import {Button, Flex, Text} from "@radix-ui/themes"
+import {ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight} from "lucide-react"
+import {useRouter, useSearchParams} from "next/navigation"
 
 type PaginationProps = {
     itemCount: number,

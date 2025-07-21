@@ -1,12 +1,12 @@
-import {PropsWithChildren} from 'react';
-import {prisma} from "@/prisma/client";
+import { getIssueById } from '@/lib/fetchTools';
+import { PropsWithChildren } from 'react';
 
 type Props = Promise<{ id: string }>
 
 export async function generateMetadata({params}: { params: Props }) {
     const {id} = await params
 
-    const issue = await prisma.issue.findUnique({where: {id: +id}})
+    const issue = await getIssueById(+id)
 
     return {
         title: `${issue?.id} - ${issue?.title}`,

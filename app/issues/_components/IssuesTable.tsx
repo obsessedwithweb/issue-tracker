@@ -1,6 +1,6 @@
-import { IssueStatusBadge } from "@/components/UI"
-import { Issue } from "@prisma/client"
-import { Table } from "@radix-ui/themes"
+import {IssueStatusBadge} from "@/components/UI"
+import {Issue} from "@prisma/client"
+import {Table} from "@radix-ui/themes"
 import Link from "next/link"
 import {IssuesTableHeader} from "."
 
@@ -24,7 +24,7 @@ const IssuesTable = ({ issues }: { issues: Issue[] }) => {
                         <Table.Cell className="hidden md:table-cell">
                             <IssueStatusBadge status={issue.status} />
                         </Table.Cell>
-                        <Table.Cell className="hidden md:table-cell">{issue.createdAt.toDateString()}</Table.Cell>
+                        <Table.Cell className="hidden md:table-cell">{new Date(issue.createdAt).toDateString()}</Table.Cell>
                     </Table.Row>
                 ))}
             </Table.Body>

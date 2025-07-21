@@ -1,14 +1,15 @@
 import authOptions from "@/app/auth/authOptions"
 // import { instance as axios } from "@/lib/axios-instance"
-import { prisma } from "@/prisma/client"
+import {prisma} from "@/prisma/client"
 // import { User } from "@prisma/client"
-import { Flex, Grid } from "@radix-ui/themes"
-import { getServerSession } from "next-auth"
-import { notFound } from "next/navigation"
+import {Flex, Grid} from "@radix-ui/themes"
+import {getServerSession} from "next-auth"
+import {notFound} from "next/navigation"
 import AssigneeSelect from "./AssigneeSelect"
 import DeleteIssueButton from "./DeleteIssueButton"
 import EditIssueButton from "./EditIssueButton"
 import IssueDetails from "./IssueDetails"
+import { getIssueById } from "@/lib/fetchTools"
 
 type Params =  Promise<{id: string}>
 
@@ -17,9 +18,8 @@ const IssueDetail = async ({ params }: {params: Params}) => {
     const session = await getServerSession(authOptions)
     // const { data } = await axios.get<User[]>('/api/users')
 
-    const issue = await prisma.issue.findUnique({
-        where: { id: +id }
-    })
+    const issue = await getIssueById(+id)
+
 
     if (!issue) return notFound();
 

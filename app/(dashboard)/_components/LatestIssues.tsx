@@ -1,18 +1,15 @@
 import { IssueStatusBadge } from "@/components/UI"
-import { prisma } from "@/prisma/client"
+import { getAllIssuesWithAssignee } from "@/lib/fetchTools"
 import { Avatar, Card, Flex, Heading, Table } from "@radix-ui/themes"
 import Link from "next/link"
 
 
 const LatestIssues = async () => {
-    const issues = await prisma.issue.findMany({
+    const issues = await getAllIssuesWithAssignee({
         orderBy: {
             createdAt: 'desc'
         },
         take: 5,
-        include: {
-            assignedUser: true
-        }
     })
 
 
@@ -23,7 +20,7 @@ const LatestIssues = async () => {
                 <Table.Body>
                     {
                         issues.map(issue => (
-                            <Table.Row key={issue.id}>
+                            <Table.Row key={issue.id} className="hover:bg-rose-400/20 transition-colors">
                                 <Table.Cell>
                                     <Flex justify='between' align='center'>
                                         <Flex direction='column' align='start' gap='3'>

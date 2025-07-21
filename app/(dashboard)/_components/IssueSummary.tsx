@@ -1,5 +1,5 @@
-import { Status } from '@prisma/client'
-import { Card, Flex, Text } from '@radix-ui/themes'
+import {Status} from '@prisma/client'
+import {Card, Flex, Text} from '@radix-ui/themes'
 import Link from 'next/link'
 
 type Props = {
@@ -25,7 +25,7 @@ const IssueSummary = ({ open, inProgress, closed }: Props) => {
         <Flex gap='2'>
             {issueStatus.map(issueType => (
                 <Card
-                    className={`hover:bg-${issueType.color}-200/20 transition-colors`}
+                    className={`hover:bg-${issueType.color}-400/20 transition-colors`}
                     key={issueType.type}>
                     <Flex
                         direction='column'

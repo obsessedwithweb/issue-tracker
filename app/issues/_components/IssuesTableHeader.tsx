@@ -1,10 +1,10 @@
 'use client'
 
-import { Issue } from "@prisma/client"
-import { Flex, Table } from "@radix-ui/themes"
-import { ArrowBigUp } from "lucide-react"
+import {Issue} from "@prisma/client"
+import {Flex, Table} from "@radix-ui/themes"
+import {ArrowBigUp} from "lucide-react"
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
+import {useSearchParams} from "next/navigation"
 
 const IssuesTableHeader = () => {
     const searchParams = useSearchParams()

@@ -1,26 +1,30 @@
-import Pagination from "@/components/UI/Pagination";
+import { Pagination } from "@/components/UI";
 import { prisma } from "@/prisma/client";
 import { Issue, Status } from "@prisma/client";
 import { Flex } from "@radix-ui/themes";
-import { ActionIssueButton } from "./_components";
-import IssuesTable from "./_components/IssuesTable";
+import { ActionIssueButton, IssuesTable } from "./_components";
+import { getAllIssues, getStatusCount } from "@/lib/fetchTools";
+
+export const dynamic = 'force-dynamic'
 
 type SearchParams = Promise<{ status: Status, orderBy: keyof Issue, page: string }>
 
 const IssuesPage = async ({ searchParams }: { searchParams: SearchParams }) => {
+
     const { status } = await searchParams
     const { orderBy } = await searchParams
     let { page } = await searchParams
-    page = page ?? 1
+    page = page ?? '1'
+
     const statusList = Object.values(Status)
     const isStatusExists = statusList.includes(status!)
-    const where = { status: isStatusExists ? status : undefined, }
+    const where: { status: Status | undefined } = { status: isStatusExists ? status : undefined, }
 
     const orderParams: string[] = ["ID", "Issue", "Status", "Created At"]
 
-    const pageSize = 8
+    const pageSize: number = 8
 
-    const issues = await prisma.issue.findMany({
+    const issues: Issue[] = await getAllIssues({
         where,
         ...(orderBy && orderParams.includes(orderBy)
             ? {
@@ -33,9 +37,10 @@ const IssuesPage = async ({ searchParams }: { searchParams: SearchParams }) => {
         skip: (+page - 1) * pageSize,
     })
 
-    const issuesCount = await prisma.issue.count({ where, })
+    const issuesCount: number = await getStatusCount(where.status!)
 
-    return <Flex direction='column' gap='6' mb='8'>
+    return (
+    <Flex direction='column' gap='6' mb='8'>
         <ActionIssueButton />
         <IssuesTable issues={issues} />
         <Pagination
@@ -43,7 +48,8 @@ const IssuesPage = async ({ searchParams }: { searchParams: SearchParams }) => {
             pageSize={pageSize}
             currentPage={+page}
         />
-    </Flex >;
+    </Flex >
+    );
 };
 
 export default IssuesPage;

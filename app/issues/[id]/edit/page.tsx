@@ -1,19 +1,31 @@
-import { prisma } from "@/prisma/client";
+import { getIssueById } from "@/lib/fetchTools";
 import { notFound } from "next/navigation";
 import IssueForm from "../../_components/IssueForm";
 
 
-const EditIssuePage = async ({ params }: {params: { id: string }}) => {
+type Params = Promise<{ id: string }>
+
+export async function generateMetadata({params}: { params: Params }) {
+    const {id} = await params
+
+    const issue = await getIssueById(+id)
+
+    return {
+        title: `Edit Issue - ${issue?.title}`,
+        description: `Edit issue: ${issue?.title} details`,
+    }
+}
+
+
+const EditIssuePage = async ({ params }: { params: Params }) => {
     const { id } = await params
 
-    const issue = await prisma.issue.findUnique({
-        where: { id: +id }
-    })
+    const issue = await getIssueById(+id)
 
     if (!issue) return notFound();
 
     return (
-    <IssueForm  issue={issue}/>
+        <IssueForm issue={issue} />
     )
 }
 
