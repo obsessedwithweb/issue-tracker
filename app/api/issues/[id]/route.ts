@@ -40,7 +40,7 @@ export async function PATCH(
     if (!validation.success)
         return NextResponse.json(validation.error.issues, {status: 400});
 
-    const {title, description, assignedUserId} = body;
+    const {title, description, assignedUserId, status} = body;
 
     if (assignedUserId) {
         const user = await prisma.user.findUnique({
@@ -55,6 +55,7 @@ export async function PATCH(
         data: {
             title,
             description,
+            status,
             assignedUserId
         },
     });
@@ -62,6 +63,7 @@ export async function PATCH(
     revalidateTag('issueId')
 
     revalidateTag('allIssuesWithAssignee')
+    revalidateTag('statusCount')
     // revalidatePath("/issues");
     // revalidatePath('/(dashboard)/', 'page')
     // revalidatePath('/', 'layout')

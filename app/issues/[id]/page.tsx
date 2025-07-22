@@ -9,6 +9,7 @@ import DeleteIssueButton from "./DeleteIssueButton"
 import EditIssueButton from "./EditIssueButton"
 import IssueDetails from "./IssueDetails"
 import {getIssueById} from "@/lib/fetchTools"
+import ChangeStatus from "./edit/ChangeStatus"
 
 type Params = Promise<{ id: string }>
 
@@ -28,6 +29,7 @@ const IssueDetail = async ({params}: { params: Params }) => {
             {session &&
                 <Flex direction='column' gap='4' >
                     <AssigneeSelect issue={issue} />
+                    <ChangeStatus issue={issue} />
                     <EditIssueButton issueID={issue.id} />
                     <DeleteIssueButton issueID={issue.id} />
                 </Flex >
