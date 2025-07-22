@@ -1,4 +1,5 @@
 @import "tailwindcss";
+
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -28,7 +29,7 @@ body {
 }
 
 body, body * {
-  transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 
@@ -36,6 +37,7 @@ body, body * {
     .nav-link {
         @apply text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors
     }
+
     .active {
         @apply text-zinc-700 dark:text-zinc-200 hover:text-zinc-700 dark:hover:text-zinc-200
     }

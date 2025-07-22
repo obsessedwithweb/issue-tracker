@@ -7,9 +7,8 @@ import {Issue} from "@prisma/client";
 import {Button, Callout, TextField} from "@radix-ui/themes";
 import axios from "axios";
 import {Ripples} from 'ldrs/react';
-import {Info, MoveLeft} from "lucide-react";
+import {Info} from "lucide-react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {useState} from 'react';
 import {Controller, useForm} from "react-hook-form";
@@ -50,7 +49,7 @@ export default function NewIssue({issue}: { issue?: Issue }) {
     return (
         <div className='max-w-xl flex flex-col gap-3 mb-5' >
             {/* <Link href={`/issues`} className="" > */}
-                <BackButton/>
+            <BackButton />
             {/* </Link > */}
             {
                 error && <Callout.Root color='red' >

@@ -1,9 +1,9 @@
-import { BackButton, IssueStatusBadge } from "@/components/UI"
-import { Issue } from "@prisma/client"
-import { Card, Flex, Heading, Text } from "@radix-ui/themes"
+import {BackButton, IssueStatusBadge} from "@/components/UI"
+import {Issue} from "@prisma/client"
+import {Card, Flex, Heading, Text} from "@radix-ui/themes"
 import Markdown from 'react-markdown'
 
-const IssueDetails = ({ issue }: { issue: Issue }) => {
+const IssueDetails = ({issue}: { issue: Issue }) => {
     return (
         <Flex className="md:col-span-4" direction='column' gap='4' >
             <BackButton />

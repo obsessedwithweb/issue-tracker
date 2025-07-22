@@ -1,5 +1,11 @@
 @import "@radix-ui/themes/styles.css";
 
 .radix-themes {
-	--default-font-family: var(--font-parkinsans);
+    --default-font-family: var(--font-parkinsans);
+}
+
+
+.rt-TextFieldInput {
+    field-sizing: content;
+    padding: 0 1rem 0 0;
 }

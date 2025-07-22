@@ -1,5 +1,5 @@
-import { BackButton } from "@/components/UI";
-import { Flex, Skeleton } from "@radix-ui/themes";
+import {BackButton} from "@/components/UI";
+import {Flex, Skeleton} from "@radix-ui/themes";
 
 
 const IssueFormSkeleton = () => {
